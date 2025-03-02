@@ -22,10 +22,10 @@ $(function() {
     wak += ary[i][2] /* 配列3つめ・テーブル3列め */
     wak += "</td>";
     wak += "<td class='tdn'>";
-    wak += ary[i][3] /* 配列3つめ・テーブル4列め */
+    wak += ary[i][3] /* 配列4つめ・テーブル4列め */
     wak += "</td>";
     wak += "<td class='tdn'>";
-    wak += ary[i][4] /* 配列3つめ・テーブル5列め */
+    wak += ary[i][4] /* 配列5つめ・テーブル5列め */
     wak += "</td>";
 /*    wak += "<td class='tdl'>"*/
 /*    wak += "<img src='"; /* ← objectタグとかにしてPDFなど読み込んでもOK */
@@ -35,7 +35,6 @@ $(function() {
   }
   $("#tabledata").append(wak);
 });  
-
 /* 絞り込み機能用メソッドです。 */
 $(function(){
   $("#button").bind("click",function(){
@@ -168,7 +167,7 @@ $(function(){
   <form method="get" action="">
     <!-- 検索用プルダウンフォームその1 -->
     <select id="release" name="">
-      <option value="">リリース年
+      <option value="">ライブ開催年
       <option value="2002/">2002
       <option value="2003/">2003	
       <option value="2004/">2004       
@@ -214,7 +213,7 @@ $(function(){
 <div class="tablewrap">
   <table id="tabledata" border="0" cellspacing="0">
     <thead>
-      <tr><th>ライブ日時</th><th>アーティスト名</th><th>ジャンル</th><th>会場</th><th>開演時刻</th></tr>
+      <tr><th>ライブ日</th><th>アーティスト名</th><th>ジャンル</th><th>会場</th><th>開演時間</th></tr>
     </thead>
     <tbody>
       <!-- テーブル出力部分です。 -->
