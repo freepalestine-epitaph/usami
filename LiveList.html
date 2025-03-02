@@ -1,0 +1,225 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+/* テーブルの出力リスト。配列の更新が簡単なように上のほうに記載しています */
+$(function() {
+  var ary =[    
+      ["2002/1/13","STEVE HACKETT","洋楽","TRIBUTE TO THE LOVE GENERATION","18:30",],      
+      ["2011/10/8","ミュージカル『美女はつらいの』","その他","大阪松竹座","14:00",],      
+      ["2012/2/16","OPETH","洋楽","umeda AKASO","19:00",],      
+      ["2011/5/31","少女時代","アイドル","大阪城ホール","18:30",],          
+  ]
+  var wak = "";
+  for (i = 0; i < ary.length; i++) {
+    wak += "<tr><td class='tdn'>";
+    wak += ary[i][0] /* 配列1つめ・テーブル1列め */
+    wak += "</td>";
+    wak += "<td class='tdn'>";
+    wak += ary[i][1] /* 配列2つめ・テーブル2列め */
+    wak += "</td>";
+    wak += "<td class='tdn'>";
+    wak += ary[i][2] /* 配列3つめ・テーブル3列め */
+    wak += "</td>";
+    wak += "<td class='tdn'>";
+    wak += ary[i][3] /* 配列3つめ・テーブル4列め */
+    wak += "</td>";
+    wak += "<td class='tdn'>";
+    wak += ary[i][4] /* 配列3つめ・テーブル5列め */
+    wak += "</td>";
+/*    wak += "<td class='tdl'>"*/
+/*    wak += "<img src='"; /* ← objectタグとかにしてPDFなど読み込んでもOK */
+/*    wak += ary[i][3] /* 配列4つめ・テーブル4列め（画像） */
+/*    wak += "'> </td>";*/
+    wak += "</tr>";
+  }
+  $("#tabledata").append(wak);
+});  
+
+/* 絞り込み機能用メソッドです。 */
+$(function(){
+  $("#button").bind("click",function(){
+    var re  = new RegExp($("#release").val());
+    var gen = new RegExp($("#genre").val());
+    var sw  = new RegExp($("#searchword").val());
+
+    $("#tabledata tbody tr").each(function(){
+      var txt = $(this).find("td").text();
+      if(txt.match(re) != null){
+        if(txt.match(gen) != null){
+          if(txt.match(sw) != null){
+            $(this).show();
+          }else{
+            $(this).hide();
+          }
+        }else{
+          $(this).hide();
+        }
+      }else{
+        $(this).hide();
+      }
+    });
+  });
+  $("#resetbutton").bind("click",function(){
+    $("#searchword, #release, #genre").val("");
+    $("#tabledata tr").show();
+  });
+});
+</script>
+
+<style type="text/css">
+  <!--
+  body {
+    background-color: #666;
+  }
+  .searchheader {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    padding: 8px 20px;
+    background-color: #eee;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .1);
+    z-index: 10;
+  }
+  .searchheader form {
+    display: block;
+    width: 980px;
+    margin: 0 auto;
+  }
+  .searchheader select {
+    margin-right: 2px;
+    padding: 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  .searchheader #searchword {
+    height: 33px;
+    width: 200px;
+    margin-right: 2px;
+    padding: 0 6px;
+  }
+  .searchheader #button,
+  .searchheader #resetbutton {
+    height: 33px;
+    margin-right: 2px;
+    padding: 0 6px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #ddd;
+  }
+  .searchheader #button {
+    background-color: #ff7f50;
+    border-color: #de693e;
+    color: #fff;
+  }
+  .searchheader #button:hover,
+  .searchheader #resetbutton:hover {
+    opacity: .7;
+  }
+  .tablewrap {
+    width: 90%;
+    max-width: 980px;
+    margin: 20px auto; 
+  }
+  #tabledata {
+    border: 2px solid #444;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  #tabledata th {
+    height: 34px;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 50px;
+    border: 1px solid #ccc;
+    color: #fff;
+    background-color: #444;
+    z-index: 10;
+  }
+  #tabledata td {
+    border: 1px solid #aaa;
+    vertical-align: top;
+    background-color: #fff;
+  }
+  #tabledata td.tdn {
+    width: 90px;
+    padding: 12px 8px;
+  }
+/*  #tabledata td.tdl {
+    padding: 12px;
+  }
+  #tabledata td.tdl img {
+    width: 100%;
+    min-width: 100px;
+    max-width: 600px;
+  }
+  #tabledata td.tdl a:hover {
+    opacity: .85;
+  }*/
+  -->
+  </style>
+</head>
+
+<body>
+
+<div class="searchheader">
+  <form method="get" action="">
+    <!-- 検索用プルダウンフォームその1 -->
+    <select id="release" name="">
+      <option value="">リリース年
+      <option value="2002/">2002
+      <option value="2003/">2003	
+      <option value="2004/">2004       
+      <option value="2005/">2005	
+      <option value="2006/">2006	
+      <option value="2007/">2007	
+      <option value="2008/">2008	
+      <option value="2009/">2009	
+      <option value="2010/">2010	
+      <option value="2011/">2011	
+      <option value="2012/">2012	
+      <option value="2013/">2013	
+      <option value="2014/">2014	
+      <option value="2015/">2015	
+      <option value="2016/">2016	
+      <option value="2017/">2017
+      <option value="2018/">2018
+      <option value="2019/">2019
+      <option value="2020/">2020
+      <option value="2021/">2021
+      <option value="2022/">2022
+      <option value="2023/">2023
+      <option value="2024/">2024
+      <option value="2025/">2025
+    </select>
+    <!-- 検索用プルダウンフォームその2 -->
+    <select id="genre" name="">
+      <option value="">ジャンル
+      <option value="洋楽">洋楽
+      <option value="邦楽">邦楽
+      <option value="アイドル">アイドル
+      <option value="その他">その他
+    </select>
+    <!-- ↓フリーワード検索 -->
+    <input type="text" id="searchword" placeholder="キーワード" >
+    <!-- ↓絞り込みボタン -->
+    <input type="button" value="絞り込む" id="button">
+    <!-- ↓リセットボタン -->
+    <input type="button" value="リセット" id="resetbutton">
+  </form>
+</div>
+
+<div class="tablewrap">
+  <table id="tabledata" border="0" cellspacing="0">
+    <thead>
+      <tr><th>ライブ日時</th><th>アーティスト名</th><th>ジャンル</th><th>会場</th><th>開演時刻</th></tr>
+    </thead>
+    <tbody>
+      <!-- テーブル出力部分です。 -->
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
